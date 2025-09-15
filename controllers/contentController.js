@@ -1,13 +1,19 @@
-const Project = require('../models/Project');
-const Experience = require('../models/Experience');
-const Contact = require('../models/Contact');
-const About = require('../models/About');
+const Project = require("../models/Project");
+const Experience = require("../models/Experience");
+const Contact = require("../models/Contact");
+const About = require("../models/About");
 
 // Create a new project
 exports.createProject = async (req, res) => {
   try {
     const { title, image, description, technologies, link } = req.body;
-    const newProject = new Project({ title, image, description, technologies, link });
+    const newProject = new Project({
+      title,
+      image,
+      description,
+      technologies,
+      link,
+    });
     await newProject.save();
     res.status(201).json(newProject);
   } catch (err) {
@@ -29,7 +35,13 @@ exports.getProjects = async (req, res) => {
 exports.createExperience = async (req, res) => {
   try {
     const { year, role, company, description, technologies } = req.body;
-    const newExperience = new Experience({ year, role, company, description, technologies });
+    const newExperience = new Experience({
+      year,
+      role,
+      company,
+      description,
+      technologies,
+    });
     await newExperience.save();
     res.status(201).json(newExperience);
   } catch (err) {

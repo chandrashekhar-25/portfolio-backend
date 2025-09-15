@@ -1,9 +1,9 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const contentRoutes = require('./routes/contentRoutes');
-const connectToDatabase = require('./config/config')
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const contentRoutes = require("./routes/contentRoutes");
+const connectToDatabase = require("./config/config");
 dotenv.config();
 
 const app = express();
@@ -22,19 +22,25 @@ app.use(express.json());
 
 connectToDatabase();
 
-const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5173']; // Add other allowed origins as needed
+const allowedOrigins = [
+  "http://127.0.0.1:5173",
+  "http://localhost:5173",
+  "https://portfolio-frontend-one-lemon.vercel.app",
+]; // Add other allowed origins as needed
 
-app.use(cors({
+app.use(
+  cors({
     origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 // Routes
-app.use('/api/content', contentRoutes);
+app.use("/api/content", contentRoutes);
 
 // Check that server is running
-app.get('/', (req, res) => {
-  res.send('Server is up and running!');
+app.get("/", (req, res) => {
+  res.send("Server is up and running!");
 });
 
 const PORT = process.env.PORT || 5000;
