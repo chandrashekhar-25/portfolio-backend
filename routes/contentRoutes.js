@@ -8,6 +8,8 @@ const {
   getContact,
   createAbout,
   getAboutContent,
+  createProfession,
+  getProfessionContent,
 } = require("../controllers/contentController");
 
 const router = express.Router();
@@ -27,5 +29,9 @@ router.get("/contact", getContact); // Get contact info
 // About section routes
 router.post("/about", createAbout); // Add about content
 router.get("/about", getAboutContent); // Get about content
+
+// Profession section routes
+router.post("/profession-info", createProfession); // Add profession content
+router.get("/profession-info", getProfessionContent); // Get profession content
 
 module.exports = router;

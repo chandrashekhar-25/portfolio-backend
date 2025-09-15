@@ -2,6 +2,7 @@ const Project = require("../models/Project");
 const Experience = require("../models/Experience");
 const Contact = require("../models/Contact");
 const About = require("../models/About");
+const Profession = require("../models/Profession");
 
 // Create a new project
 exports.createProject = async (req, res) => {
@@ -98,6 +99,33 @@ exports.getAboutContent = async (req, res) => {
   try {
     const about = await About.findOne();
     res.json(about);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Create profession section
+exports.createProfession = async (req, res) => {
+  try {
+    const { professionInfo, image, name, profession } = req.body;
+    const newProfession = new Profession({
+      professionInfo,
+      image,
+      name,
+      profession,
+    });
+    await newProfession.save();
+    res.status(201).json(newProfession);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Get profession section
+exports.getProfessionContent = async (req, res) => {
+  try {
+    const profession = await Profession.findOne();
+    res.json(profession);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
